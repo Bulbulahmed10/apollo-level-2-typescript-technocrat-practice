@@ -34,19 +34,26 @@
     }
   }
 
-  const getAnimal = (animal: Animal)=>{
-    if(animal instanceof Dog) {
-        animal.makeBark()
+  // we use function to handle smart way
+
+  const isDog = (animal: Animal): animal is Dog => {
+    return animal instanceof Dog;
+  };
+  const isCat = (animal: Animal): animal is Cat => {
+    return animal instanceof Cat;
+  };
+
+  const getAnimal = (animal: Animal) => {
+    if (isDog(animal)) {
+      animal.makeBark();
+    } else if (isCat(animal)) {
+      animal.makeMeaw();
+    } else {
+      animal.makeSound();
     }
-    else if(animal instanceof Cat) {
-        animal.makeMeaw()
-    }
-    else {
-        animal.makeSound()
-    }
-  }
+  };
 
   const dog = new Dog("Dog Bhai", "dog");
   const cat = new Cat("Cat Bhai", "cat");
-  getAnimal(dog)
+  getAnimal(cat);
 }
